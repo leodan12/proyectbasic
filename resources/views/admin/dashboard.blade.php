@@ -225,8 +225,7 @@
                     </div>
                 </div>
             </div>
-            <br>
-             
+            <br> 
                 <div class="row">
                     <div class="col">
                         <div class="alert alert-danger" role="alert"  >
@@ -241,7 +240,7 @@
                                 <button type="button" class="btn-close float-end" data-bs-dismiss="alert"
                                     aria-label="Close"></button>
                             </h2>
-                            Tienes 7 productos Con Stock Minimo y sin stock &nbsp;&nbsp;
+                            Tienes 5 productos Con Stock Minimo y sin stock &nbsp;&nbsp;
                             <a class="btn btn-info" href="{{ url('admin/inventario2') }}" style="border-radius: 20px;">
                                 <i class="mdi mdi-eye menu-icon"> VER PRODUCTOS</i>
                             </a>
@@ -262,14 +261,14 @@
                                 <button type="button" class="btn-close float-end" data-bs-dismiss="alert"
                                     aria-label="Close"></button>
                             </h2>
-                            Tienes 4 Ingresos Por Pagar &nbsp;&nbsp;
+                            Tienes 1 Ingresos Por Pagar &nbsp;&nbsp;
                             <a class="btn btn-info" href="{{ url('admin/ingreso2') }}" style="border-radius: 20px;">
                                 <i class="mdi mdi-eye menu-icon"> VER INGRESOS</i>
                             </a>
                         </div>
                     </div>
                 </div>
-             
+            
                 <div class="row">
                     <div class="col">
                         <div class="alert alert-danger" role="alert" style="background-color: #FF0000; color:white;">
@@ -283,14 +282,14 @@
                                 <button type="button" class="btn-close float-end" data-bs-dismiss="alert"
                                     aria-label="Close"></button>
                             </h2>
-                            Tienes 5 Ventas Por Cobrar &nbsp;&nbsp;
+                            Tienes 9 Ventas Por Cobrar &nbsp;&nbsp;
                             <a class="btn btn-info" href="{{ url('admin/venta2') }}" style="border-radius: 20px;">
                                 <i class="mdi mdi-eye menu-icon"> VER VENTAS</i>
                             </a>
                         </div>
                     </div>
                 </div>
-           
+          
         </div>
     </div>
 @endsection

@@ -1,7 +1,5 @@
 @extends('layouts.admin')
-@push('css')
-    <link href="{{ asset('admin/required.css') }}" rel="stylesheet" type="text/css" />
-@endpush
+ 
 @section('content')
 
     <div class="row">
@@ -38,21 +36,21 @@
                             </div>
                             <div class="col-md-8 mb-3">
                                 <label class="form-label is-required">NOMBRE</label>
-                                <input type="text" name="nombre" class="form-control borde " required />
+                                <input type="text" name="nombre" class="form-control  " required />
                                 @error('nombre')
                                     <small class="text-danger">{{ $message }}</small>
                                 @enderror
                             </div>
                             <div class="col-md-4 mb-3">
                                 <label class="form-label">CÓDIGO</label>
-                                <input type="text" name="codigo" class="form-control borde " />
+                                <input type="text" name="codigo" class="form-control  " />
 
                             </div>
 
                             <div class="col-md-4 mb-3">
                                 <label class="form-label is-required">TASA CAMBIO</label>
                                 <input type="number" value="3.71" name="tasacambio" min="0" step="0.01"
-                                    class="form-control borde" />
+                                    class="form-control " />
                             </div>
                             <div class="col-md-4 mb-3">
                                 <label class="form-label is-required">Tipo de Moneda</label>
@@ -70,7 +68,7 @@
                                     <label class="form-label input-group is-required">PRECIO SIN IGV </label>
                                     <span class="input-group-text" id="spanNoIGV"></span>
                                     <input type="number" name="NoIGV" id="NoIGV" min="0.1" step="0.01"
-                                        class="form-control borde " required />
+                                        class="form-control  " required />
                                 </div>
                             </div>
                             <div class="col-md-4 mb-3">
@@ -78,19 +76,49 @@
                                     <label class="form-label input-group is-required">PRECIO CON IGV </label>
                                     <span class="input-group-text" id="spanSiIGV"></span>
                                     <input type="number" name="SiIGV" id="SiIGV" min="0.1" step="0.01"
-                                        class="form-control borde " required readonly />
+                                        class="form-control  " required readonly />
                                 </div>
+                            </div>
+
+                            <div class="col-md-4 mb-3">
+                                <input class="form-check-input" type="checkbox" value="" name="precioxmayor"
+                                    id="precioxmayor">
+                                <label class="form-check-label" for="flexCheckDefault">
+                                    Agregar Precio por Mayor
+                                </label>
+                            </div>
+
+                            <div class="col-md-4 mb-3" id="dcantidad2" name="dcantidad2">
+                                <label class="form-label ">CANTIDAD 2</label>
+                                <input type="number" name="cantidad2" id="cantidad2" min="1" step="1"
+                                    class="form-control " />
+                            </div>
+                            <div class="col-md-4 mb-3" id="dprecio2" name="dprecio2">
+                                <label class="form-label">PRECIO SIN IGV 2</label>
+                                <input type="number" name="precio2" id="precio2" min="0" step="0.01"
+                                    class="form-control " />
+                            </div>
+                            <div class="col-md-4 mb-3" id="dcantidad3" name="dcantidad3">
+                                <label class="form-label ">CANTIDAD 3</label>
+                                <input type="number" name="cantidad3" id="cantidad3" min="1" step="1"
+                                    class="form-control " />
+                            </div>
+                            <div class="col-md-4 mb-3" id="dprecio3" name="dprecio3">
+                                <label class="form-label">PRECIO SIN IGV 3</label>
+                                <input type="number" name="precio3" id="precio3" min="0" step="0.01"
+                                    class="form-control " />
                             </div>
                             <hr>
                             <h4>Agregar Detalle de la Compra</h4>
                             <div class="col-md-6 mb-3">
                                 <label class="form-label">PRODUCTO</label>
-                                <select class="form-select select2 borde" name="product" id="product" disabled>
+                                <select class="form-select select2 " name="product" id="product" disabled>
                                     <option value="" disabled selected>Seleccione una opción</option>
                                     @foreach ($products as $product)
                                         <option id="miproducto{{ $product->id }}" value="{{ $product->id }}"
                                             data-name="{{ $product->nombre }}" data-moneda="{{ $product->moneda }}"
-                                            data-stock="{{ $product->stockempresa }}" data-price="{{ $product->NoIGV }}">
+                                            data-stock="{{ $product->stockempresa }}"
+                                            data-price="{{ $product->NoIGV }}">
                                             {{ $product->nombre }}</option>
                                     @endforeach
                                 </select>
@@ -98,7 +126,7 @@
                             <div class="col-md-6 mb-3">
                                 <label class="form-label" id="labelcantidad">CANTIDAD</label>
                                 <input type="number" name="cantidad" id="cantidad" min="1" step="1"
-                                    class="form-control borde" />
+                                    class="form-control " />
                                 @error('cantidad')
                                     <small class="text-danger">{{ $message }}</small>
                                 @enderror
@@ -109,7 +137,7 @@
                                         (REFERENCIAL):</label>
                                     <span class="input-group-text" id="spanpreciounitarioref"></span>
                                     <input type="number" name="preciounitario" min="0" step="0.01"
-                                        id="preciounitario" readonly class="form-control borde" />
+                                        id="preciounitario" readonly class="form-control " />
                                 </div>
                             </div>
                             <div class="col-md-4 mb-3">
@@ -118,7 +146,7 @@
                                         UNITARIO:</label>
                                     <span class="input-group-text" id="spanpreciounitario"></span>
                                     <input type="number" name="preciounitariomo" min="0" step="0.01"
-                                        id="preciounitariomo" class="form-control borde" />
+                                        id="preciounitariomo" class="form-control " />
                                 </div>
                             </div>
 
@@ -128,7 +156,7 @@
                                         PRODUCTO:</label>
                                     <span class="input-group-text" id="spanpreciototal"></span>
                                     <input type="number" name="preciofinal" min="0" step="0.01"
-                                        id="preciofinal" readonly class="form-control borde" />
+                                        id="preciofinal" readonly class="form-control " />
                                 </div>
                             </div>
 
@@ -182,12 +210,32 @@
         var simbolomonedaproducto = "";
         var simbolomonedafactura = "";
         var indicex = 0;
+        var micantidad2 = "";
+        var micantidad3 = "";
+        var miprecio2 = "";
+        var miprecio3 = "";
 
         $(document).ready(function() {
+            miprecioxmayor();
             document.getElementById("NoIGV").onchange = function() {
                 IGVtotal();
             };
             $('.select2').select2();
+            document.getElementById("precioxmayor").onchange = function() {
+                miprecioxmayor();
+            };
+            $("#cantidad2").change(function() {
+                micantidad2 = document.getElementById('cantidad2').value;
+            });
+            $("#cantidad3").change(function() {
+                micantidad3 = document.getElementById('cantidad3').value;
+            });
+            $("#precio2").change(function() {
+                miprecio2 = document.getElementById('precio2').value;
+            });
+            $("#precio3").change(function() {
+                miprecio3 = document.getElementById('precio3').value;
+            });
             $("#btnguardar").prop("disabled", true);
         });
 
@@ -215,6 +263,28 @@
                 //alert("final");
                 preciototal = parseFloat(cantidad) + (parseFloat(cantidad) * 0.18);
                 document.getElementById('SiIGV').value = preciototal;
+            }
+        }
+
+        function miprecioxmayor() {
+            if ($('#precioxmayor').prop('checked')) {
+                document.getElementById('dcantidad2').style.display = 'inline';
+                document.getElementById('dcantidad3').style.display = 'inline';
+                document.getElementById('dprecio2').style.display = 'inline';
+                document.getElementById('dprecio3').style.display = 'inline';
+                document.getElementById('cantidad2').value = micantidad2;
+                document.getElementById('cantidad3').value = micantidad3;
+                document.getElementById('precio2').value = miprecio2;
+                document.getElementById('precio3').value = miprecio3;
+            } else {
+                document.getElementById('dcantidad2').style.display = 'none';
+                document.getElementById('dcantidad3').style.display = 'none';
+                document.getElementById('dprecio2').style.display = 'none';
+                document.getElementById('dprecio3').style.display = 'none';
+                document.getElementById('cantidad2').value = "";
+                document.getElementById('cantidad3').value = "";
+                document.getElementById('precio2').value = "";
+                document.getElementById('precio3').value = "";
             }
         }
 
@@ -346,7 +416,7 @@
                 '</td><td><input  type="hidden" name="Lpreciofinal[]" id="preciof' + indice + '" value="' + LVenta[
                     5] + '"required>' + simbolomonedafactura + LVenta[5] +
                 '</td><td><button type="button" class="btn btn-danger" onclick="eliminarFila(' + indice + ',' +
-                    product +
+                product +
                 ')" data-id="0">ELIMINAR</button></td></tr>';
 
             $("#detallesKit>tbody").append(filaDetalle);
@@ -357,7 +427,7 @@
             limpiarinputs();
             document.getElementById('NoIGV').value = ventatotal;
             document.getElementById('SiIGV').value = (ventatotal * 1.18).toFixed(2);
-            document.getElementById('miproducto'+product).disabled = true;
+            document.getElementById('miproducto' + product).disabled = true;
             var funcion = "agregar";
             botonguardar(funcion);
         });

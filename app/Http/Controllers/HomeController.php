@@ -26,12 +26,20 @@ class HomeController extends Controller
      */
 
     public function index()
-    {
+    { 
         $usuario = Auth::user()->name;
-        return view('admin.dashboard')->with('message', 'Bienvenido usuario ' . $usuario);
+        return redirect('admin/dashboard'); 
+    }
+    public function home()
+    { 
+        $usuario = Auth::user()->name;
+        return redirect('admin/dashboard')->with('message','Bienvenido usuario '.$usuario); 
     }
     public function inicio()
-    {
+    {  
+       
         return view('admin.dashboard');
     }
+
+    
 }

@@ -1,7 +1,5 @@
 @extends('layouts.admin')
-@push('css')
-    <link href="{{ asset('admin/required.css') }}" rel="stylesheet" type="text/css" />
-@endpush
+ 
 @section('content')
 
     <div class="row">
@@ -30,7 +28,7 @@
                         <div class="row">
                             <div class="col-md-4 mb-3">
                                 <label class="form-label is-required">CATEGORIA</label>
-                                <select name="category_id" class="form-select select2 borde" required>
+                                <select name="category_id" class="form-select select2 " required>
                                     <option value="" selected disabled>Seleccione una opción</option>
                                     @foreach ($categories as $category)
                                         <option value="{{ $category->id }}"
@@ -42,7 +40,7 @@
                             <div class="col-md-8 mb-3">
                                 <label class="form-label is-required">NOMBRE</label>
                                 <input type="text" name="nombre" value="{{ $product->nombre }}"
-                                    class="form-control borde " required />
+                                    class="form-control  " required />
                                 @error('nombre')
                                     <small class="text-danger">{{ $message }}</small>
                                 @enderror
@@ -50,17 +48,17 @@
                             <div class="col-md-4 mb-3">
                                 <label class="form-label ">CÓDIGO</label>
                                 <input type="text" name="codigo" value="{{ $product->codigo }}"
-                                    class="form-control borde " />
+                                    class="form-control  " />
 
                             </div>
                             <div class="col-md-4 mb-3">
                                 <label class="form-label is-required">TASA DE CAMBIO</label>
                                 <input type="number" name="tasacambio" id="tasacambio" value="{{ $product->tasacambio }}"
-                                    min="0" step="0.01" class="form-control borde" required readonly />
+                                    min="0" step="0.01" class="form-control " required readonly />
                             </div>
                             <div class="col-md-4 mb-3">
                                 <label class="form-label is-required">TIPO DE MONEDA</label>
-                                <select name="moneda" class="form-select borde" required>
+                                <select name="moneda" class="form-select " required>
                                     <option value="">Seleccione Tipo de Moneda</option>
                                     @if ($product->moneda == 'dolares')
                                         <option value="dolares" selected>Dolares Americanos</option>
@@ -72,18 +70,45 @@
                             <div class="col-md-4 mb-3">
                                 <label class="form-label is-required">PRECIO SIN IGV</label>
                                 <input type="number" name="NoIGV" id="NoIGV" value="{{ $product->NoIGV }}"
-                                    min="0" step="0.01" class="form-control borde" required />
+                                    min="0" step="0.01" class="form-control " required />
                             </div>
                             <div class="col-md-4 mb-3">
                                 <label class="form-label is-required">PRECIO CON IGV</label>
                                 <input type="number" name="SiIGV" id="SiIGV" value="{{ $product->SiIGV }}"
-                                    min="0" step="0.01" readonly class="form-control borde" required />
+                                    min="0" step="0.01" readonly class="form-control " required />
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <input class="form-check-input" type="checkbox" value="" id="precioxmayor"
+                                    @if ($product->cantidad2 != null) checked @endif>
+                                <label class="form-check-label" for="flexCheckDefault">
+                                    ¿Agregar Precio por Mayor?
+                                </label>
+                            </div>
+                            <div class="col-md-4 mb-3" id="dcantidad2" name="dcantidad2">
+                                <label class="form-label ">CANTIDAD 2</label>
+                                <input type="number" name="cantidad2" id="cantidad2" min="1" step="1"
+                                    class="form-control " value="{{ $product->cantidad2 }}" />
+                            </div>
+                            <div class="col-md-4 mb-3" id="dprecio2" name="dprecio2">
+                                <label class="form-label">PRECIO SIN IGV 2</label>
+                                <input type="number" name="precio2" id="precio2" min="0" step="0.01"
+                                    class="form-control " value="{{ $product->precio2 }}" />
+                            </div>
+                            <div class="col-md-4 mb-3" id="dcantidad3" name="dcantidad3">
+                                <label class="form-label ">CANTIDAD 3</label>
+                                <input type="number" name="cantidad3" id="cantidad3" min="1" step="1"
+                                    class="form-control " value="{{ $product->cantidad3 }}" />
+                            </div>
+                            <div class="col-md-4 mb-3" id="dprecio3" name="dprecio3">
+                                <label class="form-label">PRECIO SIN IGV 3</label>
+                                <input type="number" name="precio3" id="precio3" min="0" step="0.01"
+                                    class="form-control " value="{{ $product->precio3 }}" />
                             </div>
                             <hr>
                             <h4>Agregar Detalle de la Compra</h4>
                             <div class="col-md-6 mb-3">
                                 <label class="form-label">PRODUCTO</label>
-                                <select class="form-select select2 borde" name="product" id="product">
+                                <select class="form-select select2 " name="product" id="product">
                                     <option value="" disabled selected>Seleccione una opción</option>
                                     @foreach ($products as $prod)
                                         @php $contp=0;    @endphp
@@ -109,7 +134,7 @@
                             <div class="col-md-6 mb-3">
                                 <label class="form-label" id="labelcantidad">CANTIDAD</label>
                                 <input type="number" name="cantidad" id="cantidad" min="1" step="1"
-                                    class="form-control borde" />
+                                    class="form-control " />
                                 @error('cantidad')
                                     <small class="text-danger">{{ $message }}</small>
                                 @enderror
@@ -120,7 +145,7 @@
                                         (REFERENCIAL):</label>
                                     <span class="input-group-text" id="spanpreciounitarioref"></span>
                                     <input type="number" name="preciounitario" min="0" step="0.01"
-                                        id="preciounitario" readonly class="form-control borde" />
+                                        id="preciounitario" readonly class="form-control " />
                                 </div>
                             </div>
                             <div class="col-md-4 mb-3">
@@ -129,7 +154,7 @@
                                         UNITARIO:</label>
                                     <span class="input-group-text" id="spanpreciounitario"></span>
                                     <input type="number" name="preciounitariomo" min="0" step="0.01"
-                                        id="preciounitariomo" class="form-control borde" />
+                                        id="preciounitariomo" class="form-control " />
                                 </div>
                             </div>
 
@@ -139,7 +164,7 @@
                                         PRODUCTO:</label>
                                     <span class="input-group-text" id="spanpreciototal"></span>
                                     <input type="number" name="preciofinal" min="0" step="0.01"
-                                        id="preciofinal" readonly class="form-control borde" />
+                                        id="preciofinal" readonly class="form-control " />
                                 </div>
                             </div>
                             @php $ind=0 ; @endphp
@@ -230,6 +255,10 @@
         var simbolomonedaproducto = "";
         var simbolomonedafactura = "";
         var indicex = 0;
+        var micantidad2 = @json($product->cantidad2);
+        var micantidad3 = @json($product->cantidad3);
+        var miprecio2 = @json($product->precio2);
+        var miprecio3 = @json($product->precio3);
         estadoguardar = @json($nrodetalles);
         var funcion1 = "inicio";
         botonguardar(funcion1);
@@ -237,8 +266,12 @@
         ventatotal = costoventa;
 
         $(document).ready(function() {
+            miprecioxmayor();
             document.getElementById("NoIGV").onchange = function() {
                 IGVtotal();
+            };
+            document.getElementById("precioxmayor").onchange = function() {
+                miprecioxmayor();
             };
             $('.select2').select2();
         });
@@ -259,7 +292,28 @@
             }
         }
 
-
+        function miprecioxmayor() {
+            if ($('#precioxmayor').prop('checked')) {
+                document.getElementById('dcantidad2').style.display = 'inline';
+                document.getElementById('dcantidad3').style.display = 'inline';
+                document.getElementById('dprecio2').style.display = 'inline';
+                document.getElementById('dprecio3').style.display = 'inline';
+                document.getElementById('cantidad2').value = micantidad2;
+                document.getElementById('cantidad3').value = micantidad3;
+                document.getElementById('precio2').value = miprecio2;
+                document.getElementById('precio3').value = miprecio3;
+            } else {
+                document.getElementById('dcantidad2').style.display = 'none';
+                document.getElementById('dcantidad3').style.display = 'none';
+                document.getElementById('dprecio2').style.display = 'none';
+                document.getElementById('dprecio3').style.display = 'none';
+                document.getElementById('cantidad2').value = "";
+                document.getElementById('cantidad3').value = "";
+                document.getElementById('precio2').value = "";
+                document.getElementById('precio3').value = "";
+            }
+        }
+        
         function IGVtotal() {
             preciototal = 0;
             var cantidad = $('[name="NoIGV"]').val();
@@ -388,7 +442,7 @@
                 '</td><td><input  type="hidden" name="Lpreciofinal[]" id="preciof' + indice + '" value="' + LVenta[5] +
                 '"required>' + simbolomonedafactura + LVenta[5] +
                 '</td><td><button type="button" class="btn btn-danger" onclick="eliminarFila(' + indice + ',' + 0 + ',' +
-                0 + ',' + product  + ')" data-id="0">ELIMINAR</button></td></tr>';
+                0 + ',' + product + ')" data-id="0">ELIMINAR</button></td></tr>';
 
             $("#detallesKit>tbody").append(filaDetalle);
 

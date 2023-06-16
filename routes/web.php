@@ -20,7 +20,7 @@ use Illuminate\Support\Facades\Route;
 Auth::routes(["register" => false]);
 
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('index');
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('index');
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'home'])->name('home');
 
 Route::middleware(['auth', 'auth.session'])->group(function () {
     Route::prefix('admin')->middleware(['auth'])->group(function () {
@@ -81,7 +81,11 @@ Route::middleware(['auth', 'auth.session'])->group(function () {
             Route::put('/rol/{cliente}', 'update');
             Route::get('/rol/{product_id}/delete', 'destroy');
         });
-
-          
+        //rutas de los historiales
+        Route::controller(App\Http\Controllers\Admin\HistorialController::class)->group(function () {
+            Route::get('/historial', 'index')->name('historial.index');
+            Route::get('/historial/{historial_id}/delete', 'destroy');
+            Route::get('/historial/limpiartabla', 'limpiartabla');
+        });
     });
 });
