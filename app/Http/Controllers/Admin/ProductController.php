@@ -3,12 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Models\Product;
-use App\Models\Category;
-use App\Models\Inventario;
-use App\Models\Detalleingreso;
-use App\Models\Detalleventa;
-use App\Models\Detallecotizacion;
-use App\Models\Detalleinventario;
+use App\Models\Category; 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ProductFormRequest;
@@ -95,16 +90,9 @@ class ProductController extends Controller
                 $product->precio3 = $request->precio3;
             }
         }
-        
-        $product->save();
-        $inventario = new Inventario;
-        $inventario->product_id = $product->id;
-        $inventario->stockminimo = 5;
-        $inventario->stocktotal = 0;
-        $inventario->status = 0;
 
-        $inventario->save();
-        $this->crearhistorial('crear', $inventario->id, $product->nombre, null, 'inventarios');
+        $product->save();
+
         $this->crearhistorial('crear', $product->id, $product->nombre, null, 'productos');
         return redirect('admin/products')->with('message', 'Producto Agregado Satisfactoriamente');
     }
@@ -170,31 +158,13 @@ class ProductController extends Controller
         $product = Product::find($product_id);
         if ($product) {
             $inventario = "";
-            $inv = Inventario::all()->where('product_id', '=', $product_id)->first();
-            if ($inv) {
-                $inventario = Detalleinventario::all()->where('inventario_id', '=', $inv->id);
-            } else {
-                $inventario = Inventario::all()->where('product_id', '=', $product_id);
-            }
-            $ingreso = Detalleingreso::all()->where('product_id', '=', $product_id);
-            $venta = Detalleventa::all()->where('product_id', '=', $product_id);
-            $cotizacion = Detallecotizacion::all()->where('product_id', '=', $product_id);
 
-            if (count($inventario) == 0 && count($ingreso) == 0 && count($venta) == 0  && count($cotizacion) == 0) {
-                if ($product->delete()) {
-                    $this->crearhistorial('eliminar', $product->id, $product->nombre, null, 'productos');
-                    return "1";
-                } else {
-                    return "0";
-                }
+            $product->status = 1;
+            if ($product->update()) {
+                $this->crearhistorial('eliminar', $product->id, $product->nombre, null, 'productos');
+                return "1";
             } else {
-                $product->status = 1;
-                if ($product->update()) {
-                    $this->crearhistorial('eliminar', $product->id, $product->nombre, null, 'productos');
-                    return "1";
-                } else {
-                    return "0";
-                }
+                return "0";
             }
         } else {
             return "2";

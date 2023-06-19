@@ -45,11 +45,11 @@ class ProductFormRequest extends FormRequest
             ],
             'NoIGV' => [
                 'required',
-                
+                'min:0',
             ],
             'SiIGV' => [
                 'required',
-                
+                'min:0',
             ],
             'maximo' => [
                 'nullable',
@@ -73,6 +73,8 @@ class ProductFormRequest extends FormRequest
             'NoIGV.required' => 'Agregar el Precio Sin IGV del Producto.',
             'SiIGV.required' => 'Agregar el Precio Con IGV del Producto.',
             'nombre.unique' => 'El Nombre del Producto ya ha sido registrada.',  
+            'NoIGV.min' => 'El Precio Minimo debe ser 0.',  
+            'SiIGV.min' => 'El Precio Minimo debe ser 0.',  
         ];
     }
 }
